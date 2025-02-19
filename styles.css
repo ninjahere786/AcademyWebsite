@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.courses {
+    margin: 20px;
+}
+
+.course {
+    background: white;
+    padding: 15px;
+    margin: 10px auto;
+    width: 80%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Open+Sans:wght@400;600&display=swap');
+
+/* Course Title */
+.course h2 {
+    font-family: 'Merriweather', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* Course Description */
+.course p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #555;
+    line-height: 1.6;
+}
+
+
+.custom-video {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: auto;
+}
+
+.play-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.play-btn:hover {
+    background-color: #218838;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+}

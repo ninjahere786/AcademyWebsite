@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Hub</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: #2c3e50;
+            color: white;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00bcd4;
+        }
+
+        .sign-in {
+            background-color: #00bcd4;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+
+        .sign-in:hover {
+            background-color: #019aaa;
+        }
+
+        /* Responsive Navbar */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: #2c3e50;
+                padding: 10px 0;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Main Content */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Adds spacing between video containers */
+            justify-content: center; /* Centers items */
+        }
+        
+        .course {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1 1 calc(50% - 20px); /* Ensures two per row */
+            min-width: 400px; /* Prevents excessive shrinking */
+        }
+
+        /* Course Title */
+        .course h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        /* Course Description */
+        .course p {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Video Player Placeholder */
+        .video-container {
+            width: 100%;
+            max-width: 600px; /* Ensures consistent width */
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: auto;
+            position: relative;
+        }
+        
+        video {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+        }
+        
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background: #2c3e50;
+            color: white;
+            font-size: 14px;
+        }
+        #play-pause {
+            background: #00bcd4;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #play-pause:hover {
+            background: #019aaa;
+        }
+        
+        #progress {
+            flex: 1;
+            margin: 0 10px;
+        }
+        
+        /* Enroll Now Button */
+        .button {
+            position: relative;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            padding-block: 0.5rem;
+            padding-inline: 1.25rem;
+            background-color: rgb(0 107 179);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #ffff;
+            gap: 10px;
+            font-weight: bold;
+            border: 3px solid #ffffff4d;
+            outline: none;
+            overflow: hidden;
+            font-size: 15px;
+            text-decoration: none;
+            width: fit-content;
+            margin-top: 10px;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            border-color: #fff9;
+        }
+
+        .button:hover .icon {
+            transform: translate(4px);
+        }
+
+        .button::before {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100%;
+            background-image: linear-gradient(
+                120deg,
+                rgba(255, 255, 255, 0) 30%,
+                rgba(255, 255, 255, 0.8),
+                rgba(255, 255, 255, 0) 70%
+            );
+            top: 0;
+            left: -100px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.jpg" alt="Logo"> <!-- Replace with your logo -->
+            <span>Course Hub</span> <!-- Website Name -->
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#" class="sign-in">A Teacher?</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="course">
+            <h2>Course Title Here</h2>
+            <p>Brief description of the course goes here. Learn the best skills from top instructors.</p>
+            <div class="video-container">
+                <video id="course-video" src="Course.mp4" poster="thumbnail.jpeg"></video>
+                <div class="controls">
+                    <button id="play-pause"><span>▶</span></button>
+                    <input type="range" id="progress" value="0">
+                    <span id="time">0:00 / 0:00</span>
+                </div>
+            </div>
+
+            
+    <div class="container">
+        <div class="course">
+            <h2>Course Title Here</h2>
+            <p>Brief description of the course goes here. Learn the best skills from top instructors.</p>
+            <div class="video-container">
+                <video id="course-video" src="Course.mp4" poster="thumbnail.jpeg"></video>
+                <div class="controls">
+                    <button id="play-pause"><span>▶</span></button>
+                    <input type="range" id="progress" value="0">
+                    <span id="time">0:00 / 0:00</span>
+                </div>
+            </div>
+
+            
+    <div class="container">
+        <div class="course">
+            <h2>Course Title Here</h2>
+            <p>Brief description of the course goes here. Learn the best skills from top instructors.</p>
+            <div class="video-container">
+                <video id="course-video" src="Course.mp4" poster="thumbnail.jpeg"></video>
+                <div class="controls">
+                    <button id="play-pause"><span>▶</span></button>
+                    <input type="range" id="progress" value="0">
+                    <span id="time">0:00 / 0:00</span>
+                </div>
+            </div>
+            
+            
+            <a href="#" class="button">
+                Enroll Now
+                <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+                    <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll(".course").forEach(course => {
+            const video = course.querySelector("video");
+            const playPauseBtn = course.querySelector("#play-pause");
+            const progress = course.querySelector("#progress");
+            const timeDisplay = course.querySelector("#time");
+        
+            playPauseBtn.addEventListener("click", () => {
+                if (video.paused) {
+                    video.play();
+                    playPauseBtn.innerHTML = "⏸";
+                } else {
+                    video.pause();
+                    playPauseBtn.innerHTML = "▶";
+                }
+            });
+        
+            video.addEventListener("timeupdate", () => {
+                const current = video.currentTime;
+                const duration = video.duration;
+                progress.value = (current / duration) * 100;
+                timeDisplay.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
+            });
+        
+            progress.addEventListener("input", () => {
+                video.currentTime = (progress.value / 100) * video.duration;
+            });
+        
+            function formatTime(time) {
+                const mins = Math.floor(time / 60);
+                const secs = Math.floor(time % 60);
+                return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+            }
+        });
+        
+
+    </script>
+
+</body>
+</html>
