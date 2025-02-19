@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgres-production-9f0d.up.railway.app"
 app.config["UPLOAD_FOLDER"] = "static/uploads"
 
 db = SQLAlchemy(app)
